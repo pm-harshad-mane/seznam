@@ -165,26 +165,18 @@ if (!window.im) {
         // var a = im._createIframeSync();
         // a.src = "//ads.pubmatic.com/AdServer/js/user_sync.html?p=49307&predirect=" + encodeURIComponent("//" + im.conf.server + "/html/pub_sync.html?pmId=");
         // elm.insertBefore(a, elm.firstChild)
-
-        (function(){
-            var script = document.createElement('script');
-            script.async = true;
-            script.type = 'text/javascript';
-            script.src = 'https://ads.pubmatic.com/AdServer/js/userSync.js';
-            script.onload = function(){
-                PubMaticSync.sync({
-                    pubId: 49307,
-                    //siteId: 43215,
-                    //delay: 1000,
-                    //url: 'http://pubmlisher.com/cookieSyncEndPoint?pubmatic_uid=(PM_UID)',
-                    //macro: '(PM_UID)',
-                    //gdpr: 1,
-                    //gdprConsent: 'ABCDEFGHIJKLMNOPQRST'
-                });    
-            }
-            var node = document.getElementsByTagName('script')[0];
-            node.parentNode.insertBefore(script, node);
-        })();
+        var script = document.createElement('script');
+        script.async = true;
+        script.type = 'text/javascript';
+        script.src = 'https://ads.pubmatic.com/AdServer/js/userSync.js';
+        script.onload = function(){
+            PubMaticSync.sync({
+                pubId: 49307,
+                url: "//" + im.conf.server + "/html/pub_sync.html?pmId="
+            });    
+        }
+        var node = document.getElementsByTagName('script')[0];
+        node.parentNode.insertBefore(script, node);
     }
     ;
     im._appnexusSync = function() {
